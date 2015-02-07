@@ -15,5 +15,5 @@ var rail = getTile(x,y,z)
 if(i == 500) {
 if(rail == 66||rail == 27) {
 var Train = Level.spawnMob(x,y,z,84);
-Entity.setRenderType(Train,trainRenderer);
+Entity.setRenderType(Train,trainRenderer.renderType);
 }}}
