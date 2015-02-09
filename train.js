@@ -67,8 +67,8 @@ function leaveGame() {
   removeButton();
 }
 function attackHook(attacker, victim){
-  if(victim == trainMob || victim == trainCart){
+  if(victim == TrainMob || victim == TrainCart){
     preventDefault();
-    Entity.rideAnimal(Player.getEntity(), trainMob)
+    Entity.rideAnimal(Player.getEntity(), TrainMob)
   }
 }
