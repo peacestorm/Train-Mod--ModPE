@@ -19,11 +19,12 @@ var TrainMob = Level.spawnMob(x,y,z,15, "mob/Train.png"); //changed to 15 for vi
 // you need to make a .png file for the texture of the Train!  Name it "Train.png" and put it in the mob file under images in assets.
 // you also need to make another one for the cart and name it "TrainCart.png".  Put it in the same folder.  Make sure it is transparent.
 Entity.setRenderType(TrainMob,trainRenderer.renderType);
+makeButton();
 }}}
 
 var buttonWindow = null;  
 
-function  newLevel() {
+function  makeButton() {
   var activity = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
   activity.runOnUiThread(new java.lang.Runnable({ run: function() {
         try {
@@ -35,7 +36,9 @@ function  newLevel() {
                 onClick: function(viewarg) {
                   Entity.remove(TrainMob);
                   Entity.remove(TrainCart);
+                  Level.dropItem(Entity.getX(TrainMob), Entity.getY(TrainMob), Entity.getZ(TrainMob), 500, 1);
                   clientMessage("Train Removed!");
+                  removeButton();
                 }
           }));
           layout.addView(button);
@@ -51,7 +54,7 @@ android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
   }}));
 }
 
-function leaveGame() {
+function removeButton() {
   var activity = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
   activity.runOnUiThread(new java.lang.Runnable({ run: function() {
         if(buttonWindow != null) { 
@@ -59,4 +62,8 @@ function leaveGame() {
           buttonwindow = null;
         }
   }}));
+}
+function leaveGame() {
+  removeButton();
+}
 }
